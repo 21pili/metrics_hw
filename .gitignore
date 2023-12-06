@@ -50,3 +50,12 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+Latex files
+
+main.aux
+main.fdb_latexmk
+main.fls
+main.log
+main.synctex.gz
+

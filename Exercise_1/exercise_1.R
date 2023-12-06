@@ -1,6 +1,6 @@
 # author : Pierre Pili
 # email : pierre.pili@etu.minesparis.psl.eu
-# description : Run all the scripts
+# description : Run all the exercise 1 scripts
 
 ### Libraries ###
 library(tidyverse)
