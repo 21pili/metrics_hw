@@ -6,10 +6,11 @@
 library(tidyverse)
 library(knitr)
 
-# Chemin vers le dossier contenant les scripts R
+# Path to R scripts
 chemin_dossier <- "SCRIPTS"
 
-# Liste des fichiers dans le dossier, triés par ordre alphabétique
+# R files list
 scripts <- list.files(chemin_dossier, pattern = "\\.R$", full.names = TRUE)
+
 #Run all the scripts
 lapply(scripts, source, local = TRUE)
