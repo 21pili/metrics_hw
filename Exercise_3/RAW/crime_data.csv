@@ -1,4 +1,4 @@
-"","com","lib_com","dep","reg","business_crea_rate","nb_crimes","nb_households","pop","income","com_type","party","tax_rate","motorway","iqr_income","nb_businesses"
+"","com","lib_com","dep","reg","business_crea","nb_crimes","nb_households","pop","income","com_type","party","tax_rate","motorway","iqr_income","nb_businesses"
 "1","01004","Ambérieu-en-Bugey","01",84,0.125148981809616,60,7217.1123919212,14631,2,"C","Right",0.192199990153313,1,15372,839
 "2","01033","Bellegarde-sur-Valserine","01",84,0.121268659830093,61,8140.85758265838,12108,2,"C","Right",0.234599992632866,1,17904,536
 "3","01053","Bourg-en-Bresse","01",84,0.112174578011036,100,23415.0081069847,42894,2,"C","Left",0.254999995231628,1,15756,2612

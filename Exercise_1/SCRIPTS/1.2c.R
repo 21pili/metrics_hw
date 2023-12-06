@@ -18,9 +18,6 @@ df <- read_excel("Exercise_1/RAW/employment.xls") #nolint
 
 
 ### Core
-# Create a new category for the literacy variable
-literacy_levels <- c("Low Literacy", "Medium Literacy", "High Literacy")
-
 df <- df %>%
   mutate(literacy_category = case_when(
     literacy < 50 ~ "Low Literacy",

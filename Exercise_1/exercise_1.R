@@ -7,7 +7,7 @@ library(tidyverse)
 library(knitr)
 
 # Path to R scripts
-chemin_dossier <- "SCRIPTS"
+chemin_dossier <- "Exercise_1/SCRIPTS"
 
 # R files list
 scripts <- list.files(chemin_dossier, pattern = "\\.R$", full.names = TRUE)
