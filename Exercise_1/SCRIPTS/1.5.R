@@ -27,15 +27,17 @@ step_1 <- lm(self_emp ~ log_gdp + literacy, df)
 step_2 <- lm(agro_emp ~ log_gdp + literacy, df)
 
 # Step 3 : Regress ˆr on û and get the coefficient of interest beta_3
-step_3 <- lm(residuals(step_1) ~ residuals(step_2), df)
-
-# Extract the coefficient of interest (beta_3)
-beta_3 <- coef(step_3)[2]
-
+r_hat <- residuals(step_1)
+u_hat <- residuals(step_2)
+step_3 <- lm(r_hat ~ u_hat)
 
 
 ### Exports
 # Generate a latex table for of the regression
-code_latex <- stargazer(model_3, model_6, title = "Linear Regressions - Exercise 1", #nolint
-                        align = TRUE, type = "latex", label = "results_1",
-                        out = "Exercise_1/OUTPUT/results.tex")
+code_latex <- stargazer(step_1, step_2,  title = "First and Second Regressions in 3-step Procedure - Exercise 1", #nolint
+                        align = TRUE, type = "latex", label = "step_1_2_results", #nolint
+                        out = "Exercise_1/OUTPUT/step_1_2.tex")
+
+code_latex <- stargazer(step_3,  title = "Third Regression in 3-step Procedure - Exercise 1", #nolint
+                        align = TRUE, type = "latex", label = "step_3_results",
+                        out = "Exercise_1/OUTPUT/step_3.tex")

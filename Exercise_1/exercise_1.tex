@@ -45,12 +45,12 @@ Figure \ref{fig:emp_lit} seems to demonstrate a negative relationship between th
 
 \subsection{Estimate the model parameters described using OLS, report your results and summarize them}
 \input{"Exercise_1/OUTPUT/results.tex"}
-Denoting this linear model as (1) and estimating it yields the results displayed in Table \ref{results_1} (first column).
+Denoting this linear model as (1) (we shall refer to it as the "simple estimation" in the rest of this section) and estimating it yields the results displayed in Table \ref{results_1} (first column).
 This OLS estimation was based on only 143 observations, which is far from 217. This raises a
 question, are NAs equally distributed across the sample ? That being aknowledged, this regression seems
 to be very significant. The overall significance is very high as the F-stat demonstrates.
 Every of the three coefficients are significantly different from zero at the 1\% level.
-The sign of the variables is in line with the previous discussion in question 1.1.
+The signs of the variables are in line with the previous discussion in question 1.1.
 According to this estimation, a 1\% increase in GDP corresponds to a 6.5\% decrease in the share of self employement.
 A 1\% increase in the literacy rate is associated with a 0.3\% decrease in the dependent variable, while a 0.59\% increase in self employment shares 
 can be explained by a 1\% increase in the share of the agricultural sector.
@@ -60,20 +60,46 @@ The Frisch-Waugh theorem can be used for estimating specific coefficients in a m
 
 
 \textbf{Step 1:}\\
-Identify control variables, here log\_gdp and literacy and regress it on the dependent variable to get the residuals $\hat{r}$.
+Identify control variables, here log\_gdp and literacy, and regress it on the dependent variable to get the residuals $\hat{r}$. The residuals of this regression is the part of self\_emp that is not explained by the log\_gdp and literacy variables.
 \begin{equation*}
-  \text{self\_emp} = \alpha_0 + \alpha_1 log\_gdp + \alpha_2 literacy + r 
+  \text{self\_emp} = \alpha_0 + \alpha_1 \text{log\_gdp} + \alpha_2 \text{literacy} + r 
 \end{equation*}
 \textbf{Step 2:}\\
-Regress the variable of interest on the control variables and get the residuals $\hat{u}$.
+Regress the variable of interest on the control variables and get the residuals $\hat{u}$. The residuals of this regression is the part of agro\_emp that is not explained by the log\_gdp and literacy variables.
 \begin{equation*}
-  \text{agro\_emp} = \gamma_0 + \gamma_1 log\_gdp + \gamma_2 literacy + u 
+  \text{agro\_emp} = \gamma_0 + \gamma_1 \text{log\_gdp} + \gamma_2 \text{literacy} + u 
 \end{equation*}
 \textbf{Step 3:}\\
-Regress $\hat{r}$ on $\hat{u}$ and get the coefficient of interest $\beta_3$.
+Regress $\hat{r}$ on $\hat{u}$ and get the coefficient of interest $\beta_3$. 
 \begin{equation*}
   \hat{r} = \beta_0 + \beta_3 \hat{u} + \epsilon
 \end{equation*}
 The coefficient $\beta_3$ is the estimate of the parameter for agro\_emp after controlling for log\_gdp and literacy.
 
 \subsection{Implement this 3-step procedure and compare your estimate and standard error of $\beta_3$}
+Table \ref{step_1_2_results} and Table \ref{step_3_results} display the results of the 3-step
+procedure previously described,
+where $\hat{r}$, $\hat{u}$ are respectively denoted as r\_hat and u\_hat.
+The first regression yields coefficients that are very different from the first estimation (first column of Table \ref{results_1}).
+This is an expected result, indeed as agro\_emp is assumed to be part of the data generating process,
+the first step estimation is inconsistent because of endogeneity issues.
+The higher the correlation between agro\_emp and control variable, the larger is the discrepency between coefficients from the first step of the Frisch-Waugh procedure and the simple estimation.
+The third regression yields an estimation for $\beta_3$ and its standard error which are very close to what we got in the simple estimation.
+Those results were expected and a direct implication of the Frisch-Waugh theorem. 
+\input{Exercise_1/OUTPUT/step_1_2.tex}
+\input{Exercise_1/OUTPUT/step_3.tex}
+
+\stepcounter{subsection}
+\subsubsection{Estimate a linear model that includes the expanded set of covariates using OLS. Report
+your results and interpret them}
+Denoting this model as (2) (we shall refer to it as the "extended model"), the results are displayed in Table \ref{results_1} along with the simple model estimation.
+The common coefficients among both model are in line with each other regarding values and errors.
+The bribery variable is not significantly different from zero at the 10\%.
+The stocks variable is significantly different from zero at the 10\% level which is not a very strong result.
+The gfce variable is significantly different from zero at the 5\% level and means that a 1\% increase in the value of stocks traded as a share of GDP is associated with a roughly 1\% increase in the share of self employement.
+In other words, the larger the financial sector, the larger the share of self employement in the economy. 
+\subsubsection{How many observations was this model estimated on? Is it identical or different from the number of observations in question 3 and why?}
+The first thing to notice by comparing the simple and extended models is that the sample size is much smaller for the extended
+model as the individuals with at least one NA among the 6 variables were removed.
+The immediate consequence is that the simple model is roughly twice as precise as the extended one.
+\subsubsection{We are told that many of these variables, including the variable on self-employment rates, are measured using sample surveys in each country. This implies that the variance of each observation is directly proportional to the sample size used in each country. What does this imply for the OLS estimator?}

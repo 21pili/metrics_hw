@@ -20,6 +20,6 @@ model_3 <- lm(self_emp ~ log_gdp + literacy + agro_emp, df)
 model_6 <- lm(self_emp ~ log_gdp + literacy + agro_emp + gfce + stocks + bribery, df) #nolint
 ### Exports
 # Generate a latex table for of the regression
-code_latex <- stargazer(model_3, model_6, title = "Linear Regressions - Exercise 1", #nolint
+code_latex <- stargazer(model_3, model_6, title = "Simple and Extended Models - Exercise 1", #nolint
                         align = TRUE, type = "latex", label = "results_1",
                         out = "Exercise_1/OUTPUT/results.tex")
