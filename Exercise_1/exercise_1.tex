@@ -1,8 +1,14 @@
-\subsection{}
+\subsection{Create a table of descriptive statistics of the variables in the dataset.}
 \input{"Exercise_1/OUTPUT/summary.tex"}
 
-\subsection{}
-\subsubsection*{(a)}
+The data is made of 217 countries and certain variables contains a significant
+amount of missing values (NAs) (See \ref{desc}). Bribery is the worst variable with up to 87 NAs. Using
+this variable in a regression would yield a low precision as the size of the sample is quite small.
+This table demonstrates how different countries are, indeed the min-max interval is rather close to one for rate variables and the standart deviations (sd)
+are very significant compared to the mean value of each variable.
+
+\stepcounter{subsection}
+\subsubsection{Is it the case that self-employment is correlated with how rich a country is (in-terms of log GDP per-capita)?}
 
 
 \begin{figure}[htbp]
@@ -15,7 +21,7 @@
 
 Figure \ref{fig:emp_gdp} shows a clear negative relationship between the share of self employment and gdp. The empirical correlation coefficient is equal to $-0.89$
 which is very close to $-1$. The anticorrelation is very strong.
-\subsubsection*{(b)}
+\subsubsection{Is it the case that countries with higher share of employment in agriculture also have higher self-employment rates?}
 
 \begin{figure}[htbp]
   \centering
@@ -27,7 +33,7 @@ which is very close to $-1$. The anticorrelation is very strong.
 As in the previous question, Figure \ref{fig:emp_agro} shows a clear positive relationship between the share of self employment and share of employment in the agricultural sector. The empirical correlation coefficient is equal to $0.91$
 which is very close to $1$. The correlation is very strong.
 
-\subsubsection*{(c)}
+\subsubsection{Present a bar graph comparing the mean self-employment rates in each of these 3 literacy-based categories of countries.}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{Exercise_1/OUTPUT/bar_emp_literacy.png}
@@ -37,5 +43,37 @@ which is very close to $1$. The correlation is very strong.
 
 Figure \ref{fig:emp_lit} seems to demonstrate a negative relationship between the literacy category of the population and the self employment rate.
 
-\subsection{}
+\subsection{Estimate the model parameters described using OLS, report your results and summarize them}
 \input{"Exercise_1/OUTPUT/results.tex"}
+Denoting this linear model as (1) and estimating it yields the results displayed in Table \ref{results_1} (first column).
+This OLS estimation was based on only 143 observations, which is far from 217. This raises a
+question, are NAs equally distributed across the sample ? That being aknowledged, this regression seems
+to be very significant. The overall significance is very high as the F-stat demonstrates.
+Every of the three coefficients are significantly different from zero at the 1\% level.
+The sign of the variables is in line with the previous discussion in question 1.1.
+According to this estimation, a 1\% increase in GDP corresponds to a 6.5\% decrease in the share of self employement.
+A 1\% increase in the literacy rate is associated with a 0.3\% decrease in the dependent variable, while a 0.59\% increase in self employment shares 
+can be explained by a 1\% increase in the share of the agricultural sector.
+
+\subsection{Describe how you could estimate $\beta_3$ using a 3-step procedure based on the Frisch-Waugh Theorem.}
+The Frisch-Waugh theorem can be used for estimating specific coefficients in a multiple regression model while controlling for other variables. Here are the simplified three steps:
+
+
+\textbf{Step 1:}\\
+Identify control variables, here log\_gdp and literacy and regress it on the dependent variable to get the residuals $\hat{r}$.
+\begin{equation*}
+  \text{self\_emp} = \alpha_0 + \alpha_1 log\_gdp + \alpha_2 literacy + r 
+\end{equation*}
+\textbf{Step 2:}\\
+Regress the variable of interest on the control variables and get the residuals $\hat{u}$.
+\begin{equation*}
+  \text{agro\_emp} = \gamma_0 + \gamma_1 log\_gdp + \gamma_2 literacy + u 
+\end{equation*}
+\textbf{Step 3:}\\
+Regress $\hat{r}$ on $\hat{u}$ and get the coefficient of interest $\beta_3$.
+\begin{equation*}
+  \hat{r} = \beta_0 + \beta_3 \hat{u} + \epsilon
+\end{equation*}
+The coefficient $\beta_3$ is the estimate of the parameter for agro\_emp after controlling for log\_gdp and literacy.
+
+\subsection{Implement this 3-step procedure and compare your estimate and standard error of $\beta_3$}

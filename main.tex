@@ -11,10 +11,19 @@
 \usepackage{dcolumn}  % Pour aligner les nombres dans les colonnes
 \usepackage{booktabs}  % Pour des lignes horizontales de meilleure qualité
 \usepackage{caption}   % Pour personnaliser les légendes des tableaux
+\usepackage{parskip} % Aligned paragraphs
+\usepackage{titlesec} % Handles subsection title sizes
+\usepackage{enumitem} % Handles section enumerations 1.1.a...
+
+% Configuration de la numérotation des sections
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\alph{subsubsection}}
 
 
 \setlength{\headheight}{14.49998pt}
 \addtolength{\topmargin}{-2.49998pt}
+\titleformat{\subsection}{\normalfont\small\bfseries}{\thesubsection}{1.3em}{} % reduces subsection title size
+\titleformat{\subsubsection}{\normalfont\small\bfseries}{\thesubsubsection}{1.3em}{}
 
 \geometry{top=4cm, bottom=4cm, left=4cm, right=4cm}
 \pagestyle{fancy}
