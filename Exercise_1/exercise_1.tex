@@ -76,7 +76,7 @@ Regress $\hat{r}$ on $\hat{u}$ and get the coefficient of interest $\beta_3$.
 \end{equation*}
 The coefficient $\beta_3$ is the estimate of the parameter for agro\_emp after controlling for log\_gdp and literacy.
 
-\subsection{Implement this 3-step procedure and compare your estimate and standard error of $\beta_3$}
+\subsection{Implement this 3-step procedure and compare your estimate and standard error of $\beta_3$.}
 Table \ref{step_1_2_results} and Table \ref{step_3_results} display the results of the 3-step
 procedure previously described,
 where $\hat{r}$, $\hat{u}$ are respectively denoted as r\_hat and u\_hat.
@@ -102,4 +102,16 @@ In other words, the larger the financial sector, the larger the share of self em
 The first thing to notice by comparing the simple and extended models is that the sample size is much smaller for the extended
 model as the individuals with at least one NA among the 6 variables were removed.
 The immediate consequence is that the simple model is roughly twice as precise as the extended one.
+
 \subsubsection{We are told that many of these variables, including the variable on self-employment rates, are measured using sample surveys in each country. This implies that the variance of each observation is directly proportional to the sample size used in each country. What does this imply for the OLS estimator?}
+The statement that the variance of each observation is directly proportional to the sample size implies heteroscedasticity in the data. Heteroscedasticity violates one of the assumptions of OLS regression, which assumes that the variance of the error term is constant across all levels of the independent variables.
+Indeed, testing for heteroscedasticity in the simple model using a White test leads to reject the homoskedascity assumption at the  10\% level with a p-value of $0.058$. Running the White test on the extended
+model yields no proof of heteroscedasticity mostly because the sample is not large enough.
+Assuming that the variance of each observation is directly proportional to the sample size,
+it is enough to intensify the variables and divide them all by the sample size. What we obtain is thus
+a sphericalized model which should not bear any heteroscedasticity issues. Table \ref{WLS} displays the results
+of the sphericalized estimation.
+The coefficient $\beta_3$ is significantly different from zero at the 1\% level and positive but its value is very different from the extended OLS. This was an expected result, in case of heteroscedasticity, the OLS estimated variance has no reason to be true as the variance-covariance matrix of the noise used to compute it is wrongly specified.
+\input{Exercise_1/OUTPUT/wls.tex}
+\subsection{What can you conclude about the factors driving differences in self-employment rates at the
+macro-level based on your above answers? Can these results be interpreted as causal?}
