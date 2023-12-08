@@ -1,7 +1,38 @@
-\subsection{}
+\subsection{Compute the crime rate per household. Generate a table of descriptive statistics of all the
+variables that have been introduced so far. Comment on the descriptive statistics.}
 \input{"Exercise_3/OUTPUT/summary.tex"}
 Table \ref{desc2} shows the descriptive statistics of the table made of
 900 hundred municipalities. First, the data is remarkably clean as their is no
-NA values in it.
-
+NA values in it. For a clearer view I displayed the relative standard deviation (rsd)
+defined as the standard deviation divided by the mean. I still have to comment on
+this table but I don't know what to say.
+\subsection{Estimate the model in equation (7) using OLS.}
 \input{Exercise_3/OUTPUT/results.tex}
+The coefficient of interest that results from the OLS (see Table \ref{results2}) is significantly different from zero at the 1\% level, and positive.
+This is very unexpected as it would mean that the better the shape of the economy, the higher the crime rate. This result
+could derive from endogeneity issues as an ommited variable bias for instance.
+The fact that the coefficient of interest is positive while we expect it to be negative
+means that the endogeneity issues are more than just measurment error as this kind of
+problem leads underestimations (in absolute value) of the true coefficient.
+
+\subsection{After estimating the model in equation (7), you wonder whether enodegeneity is a problem.
+Why could the variable of interest, the business creation growth rate, be endogenous?}
+As mentioned in the previous question, the fact that the estimation for the coefficient of interest is positive
+leads to thinking about an ommited variable bias. For instance, both the shape of the economy and the crime rate could
+be related to the level of inequality in the area. To inspect this hypothesis, we used the
+iqr\_income variable which is defined as the difference between the first and third quartiles of income.
+This is a proxy for the local level of inequality. Figure \ref{ineq} displays the crime rate and the business creation growth rate
+against the iqr\_income variable. Even though the result is not cristal clear, we still find some positive correlation for both
+the dependant and the explanatory variable. This is a source of enodegeneity. The coefficient of correlation with iqr\_income are respectively 0.23 and 0.082 for the business creation rate and the crime rate. 
+\begin{figure}[htbp]
+    \begin{minipage}{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{Exercise_3/OUTPUT/cr_iqr.png}
+    \end{minipage}%
+    \begin{minipage}{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{Exercise_3/OUTPUT/bcr_iqr.png}
+    \end{minipage}
+    \caption{Crime rate and business creation growth rate with respect to inequality indicator}
+    \label{ineq}
+  \end{figure}

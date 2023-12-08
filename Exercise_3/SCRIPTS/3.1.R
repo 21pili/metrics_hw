@@ -40,14 +40,15 @@ summary <- df %>%
     min = sapply(., min, na.rm = TRUE),
     max = sapply(., max, na.rm = TRUE),
     sd = sapply(., sd, na.rm = TRUE),
-    NAs = sapply(., na_frequency)
+    rsd = sd / mean
   ) %>%
   mutate(
     median = ifelse(median > 1000 | median < 0.1, sprintf("%.1e", median), sprintf("%.1f", median)), #nolint
     mean = ifelse(mean > 1000 | mean < 0.1, sprintf("%.1e", mean), sprintf("%.1f", mean)), #nolint
     min = ifelse(min > 1000 | min < 0.1, sprintf("%.1e", min), sprintf("%.1f", min)), #nolint
     max = ifelse(max > 1000 | max < 0.1, sprintf("%.1e", max), sprintf("%.1f", max)), #nolint
-    sd = ifelse(sd > 1000 | sd < 0.1, sprintf("%.1e", sd), sprintf("%.1f", sd)) #nolint
+    sd = ifelse(sd > 1000 | sd < 0.1, sprintf("%.1e", sd), sprintf("%.1f", sd)), #nolint
+    rsd = ifelse(rsd > 1000 | rsd < 0.1, sprintf("%.1e", rsd), sprintf("%.1f", rsd)) #nolint
   )
 
 

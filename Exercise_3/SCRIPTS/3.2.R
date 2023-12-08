@@ -19,7 +19,7 @@ model_2 <- lm(crime_rate ~ business_crea + log(pop) + income + com_type, df)
 
 ### Exports
 # Generate a latex table for of the regression
-code_latex <- stargazer(model_2, title = "Results",
+code_latex <- stargazer(model_2, title = "Ordinary Least Square Estimation - Exercise 3", #nolint
                         align = TRUE, type = "latex",
                         label = "results2",
                         out = "Exercise_3/OUTPUT/results.tex")
