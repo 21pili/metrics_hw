@@ -1,12 +1,13 @@
 # author : Pierre Pili
 # email : pierre.pili@etu.minesparis.psl.eu
-# description : Question 3.2
+# description : Question 3.3
 # After estimating the model in equation (7), you wonder whether
 # enodegeneity is a problem. Why could the variable of interest,
 # the business creation growth rate, be endogenous?
 
 
 ### Libraries
+library(tidyverse)
 library(readxl)
 library(xtable)
 library(stargazer)
@@ -46,4 +47,3 @@ ggsave("Exercise_3/OUTPUT/bcr_iqr.png", plot = plot, height = 8, width = 10, uni
 
 cor_iqr_cr <- cor(df$crime_rate, df$iqr_income)
 cor_iqr_bcr <- cor(df$business_crea, df$iqr_income)
-

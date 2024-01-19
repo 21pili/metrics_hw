@@ -6,6 +6,7 @@
 
 
 ### Libraries
+library(tidyverse)
 library(readxl)
 library(xtable)
 library(stargazer)

@@ -4,8 +4,7 @@ variables that have been introduced so far. Comment on the descriptive statistic
 Table \ref{desc2} shows the descriptive statistics of the table made of
 900 hundred municipalities. First, the data is remarkably clean as their is no
 NA values in it. For a clearer view I displayed the relative standard deviation (rsd)
-defined as the standard deviation divided by the mean. I still have to comment on
-this table but I don't know what to say.
+defined as the standard deviation divided by the mean.
 \subsection{Estimate the model in equation (7) using OLS.}
 \input{Exercise_3/OUTPUT/results.tex}
 The coefficient of interest that results from the OLS (see Table \ref{results2}) is significantly different from zero at the 1\% level, and positive.
@@ -36,3 +35,65 @@ the dependant and the explanatory variable. This is a source of enodegeneity. Th
     \caption{Crime rate and business creation growth rate with respect to inequality indicator}
     \label{ineq}
   \end{figure}
+\stepcounter{subsection}
+\subsubsection{Discuss the validity of all potential instruments with respect to the relevance condition.}
+For an instrumental variable to be relevant, they should have no direct impact on the dependant variable (orthogonality condition). Are there any reason to think that one of the three variables impact local crime rate ? It seems very unlikely for the motorway variable, unless a majority of crimes happen to occur during motoraces, which seems ridiculous. If we assume that the crime rate is driven by the living condition of a population, it seems unlikely that changing the political party of the mayor \textit{ceteris paribus} would have any impact on the crime rate. As for the tax rate variable, I would like to be more cautious. If, as I believe it is, the inequality level is part of the data generating process, then it could be that the local tax rate has an impact on the local level of (perceived) inequality and would impact the crime rate through this ommited variable. One should inspect the literature on the subject to build intuition about such a matter.
+\subsubsection{Use the correlation between the business ce rate and the three variables to assess their potential strength as instruments. Does one seem better suited as an instrument than the other? Why?}
+
+After computing the correlation between the instruments and the business creation growth rate, it appears that the motorway variable seems to be better suited than the other with correlation of 0.295 compared to 0.165 for the tax\_rate and -0.005 for the political party (see Figure \ref{cor}). The tax\_rate could still be used as an instrument with a correlation of 0.165 while the right variable would not add any information to the model.
+
+\begin{figure}[htbp]
+  \begin{minipage}{0.33\textwidth}%
+    \centering
+    \includegraphics[width=\textwidth]{Exercise_3/OUTPUT/bcr_mtw.png}
+  \end{minipage}%
+  \begin{minipage}{0.33\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exercise_3/OUTPUT/bcr_pty.png}
+  \end{minipage}%
+  \begin{minipage}{0.33\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exercise_3/OUTPUT/bcr_tx.png}
+  \end{minipage}
+  \caption{Business creation growth rate against instruments}
+  \label{cor}
+\end{figure}
+
+\subsubsection{Thoroughly discuss the validity of the IV candidates regarding the exclusion restriction.}
+We have discussed the exogeneity condition in the question 3.4.a which can be summarized as such :
+there are no reasons to think the the party and motorway variables are part of the unexplained variations of the dependent variable while the tax rate variable could impact the level of inequality and thus impact the crime rate.
+We cannot check the orthogonality condition as it relies on the distribution of the noise which we cannot access. 
+To inspect the exclusion restriction, we can run a regression adding the instrumental variables to
+the equation of interest and check that the coefficients are not significantly different from zero (see Table \ref{results3}).
+It appears that the only instrumental variable that does not explain any variation in the
+dependant variable is the party variable. It is not very convenient as
+the party variable is also the weakest instrumental variable according to 3.4.b.
+Although I have no explanation for the impact of the motorway variable, the coefficient
+before the tax\_rate does not seem to confirm our analysis about the impact of this variable through the level
+of inequality as it is positive. Maybe the tax\_rate is perceived as
+unfair and actually increases the tension between the State and the population.
+\input{Exercise_3/OUTPUT/extended_results.tex}
+
+\stepcounter{subsection}
+
+\subsubsection{Run 3 ﬁrst-stage regressions, each using one of the above instruments separately. Report
+the 3 sets of results in the same table. Which instrument seems to be the strongest?}
+The results are displayed in Table \ref{first_stages} and correspond to what we displayed in Figure \ref{cor}.
+The motorway variable seems to be the strongest instrument with a coefficient significantly different from zero at the 1\% level whereas the tax\_rate is only significant at the 5\% level and the party variable is not significant whatsoever. 
+\input{Exercise_3/OUTPUT/first_stages.tex}
+\subsubsection{Extract the ﬁtted values of any one of these ﬁrst-stage regressions and use them to run
+a second-stage regression. Assuming that the instrument is exogenous, are your results
+reliable? Why?}
+The results are displayed in Table \ref{2sls} along with the ivreg 2SLS regression. Although the coefficient of interest is significant at the 1\%, we have seen in Table \ref{results3} that the motorway variable
+was part of the data generating process, thus even assuming the exogeneity condition is not enough to rely on those results.
+\subsubsection{For the instrument chosen in part (b), instead of manually running the 2 stages, implement
+the IV estimator using the ivreg package. Is your answer the same or different to the
+answer in part (b) and why?}
+The coefficients and variances are the almost identical as in the previous question because the computation follows the same process (see Table \ref{2sls}). That aside, the $R^2$ coefficient is negative which is a sign that the model is either wrong or overfitted. 
+\input{Exercise_3/OUTPUT/2sls_mtw.tex}
+\subsubsection{Use all instruments you think are valid to implement the IV estimator using the ivreg
+package and report your results. How different are the results from part (c)?}
+The two estimators that are correlated enough with the endogenous variable are the motorway and tax\_rate variables
+(see Table \ref{first_stages}), assuming the orthogonality condition for both of them, they are the only estimators to use in a 2SLS regression.
+The results are displayed in Table \ref{2sls_mtw_tr} and we get an even higher coefficient for the growth rate of the economy which would mean that, the better the shape of the economy in an area, the higher the crime rate even after recovering exogeneity using insrumental variables. 
+\input{Exercise_3/OUTPUT/2sls.tex}

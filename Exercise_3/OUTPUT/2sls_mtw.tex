@@ -1,0 +1,49 @@
+
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Ven, jan 19, 2024 - 14:33:59
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{2SLS Regression with and without ivreg Package} 
+  \label{2sls} 
+\small 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{2}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-3} 
+\\[-1.8ex] & \multicolumn{2}{c}{crime\_rate} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{\textit{manual 2SLS}} & \multicolumn{1}{c}{\textit{ivreg 2SLS}} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)}\\ 
+\hline \\[-1.8ex] 
+ fitted\_business\_crea & 0.111^{***} &  \\ 
+  & (0.033) &  \\ 
+  & & \\ 
+ business\_crea &  & 0.111^{***} \\ 
+  &  & (0.039) \\ 
+  & & \\ 
+ log(pop) & -0.001 & -0.001 \\ 
+  & (0.0004) & (0.0005) \\ 
+  & & \\ 
+ income & 0.0001 & 0.0001 \\ 
+  & (0.0001) & (0.0001) \\ 
+  & & \\ 
+ com\_typeC & 0.001 & 0.001 \\ 
+  & (0.001) & (0.001) \\ 
+  & & \\ 
+ com\_typeI & 0.001 & 0.001 \\ 
+  & (0.001) & (0.001) \\ 
+  & & \\ 
+ Constant & -0.002 & -0.002 \\ 
+  & (0.002) & (0.003) \\ 
+  & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{899} & \multicolumn{1}{c}{899} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.149} & \multicolumn{1}{c}{-0.174} \\ 
+Adjusted R$^{2}$ & \multicolumn{1}{c}{0.144} & \multicolumn{1}{c}{-0.181} \\ 
+Residual Std. Error (df = 893) & \multicolumn{1}{c}{0.004} & \multicolumn{1}{c}{0.005} \\ 
+F Statistic & \multicolumn{1}{c}{31.260$^{***}$ (df = 5; 893)} &  \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{2}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
